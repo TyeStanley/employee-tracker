@@ -1,8 +1,9 @@
 import inquirer from 'inquirer';
+import db from './connection.js';
 
 class sql {
+  // add an employee to the database
   addEmployee() {
-    // add an employee to the database
     inquirer.prompt([
       {
         type: 'input',
@@ -17,7 +18,7 @@ class sql {
       {
         type: 'input',
         name: 'manager',
-        message: 'Who is your manager? (if any)'
+        message: 'Who is your managers id?'
       }
     ])
     .then(answers => {
@@ -105,6 +106,4 @@ class sql {
   
 }
 
-// module.exports = sql;
 export default sql;
-

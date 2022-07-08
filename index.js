@@ -21,6 +21,8 @@ const questions = [
 ]
 // Test Zone
 function init() {
+  
+  console.log('==========================================================');
   inquirer.prompt(questions).then(answers => {
     switch (answers.menu) {
       case 'Add Employee':
@@ -45,8 +47,8 @@ function init() {
   });
 };
 
-function hello() {
-  console.log('Hello World');
-}
-// hello();
-init();
+db.query('SELECT * FROM employee', (err, results) => {
+  console.log(results);
+});
+
+// init();

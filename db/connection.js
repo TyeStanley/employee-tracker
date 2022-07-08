@@ -10,7 +10,8 @@ const db = mysql.createConnection(
     user: process.env.DB_USER,
     // Your MySQL password
     password: process.env.DB_PW,
-    database: process.env.NAME
+    database: process.env.NAME,
+    rowsAsArray: true
   },
   console.log(`Connected to the ${process.env.DB_NAME} database.`)
 );
