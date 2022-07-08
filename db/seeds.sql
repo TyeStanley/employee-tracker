@@ -1,38 +1,28 @@
-INSERT INTO department (name) VALUES ('Engineering');
-INSERT INTO department (name) VALUES ('Fiance');
-INSERT INTO department (name) VALUES ('Legal');
-INSERT INTO department (name) VALUES ('Sales');
+INSERT INTO department (name) 
+VALUES 
+  ('Engineering'),
+  ('Fiance'),
+  ('Legal'),
+  ('Sales');
 
 INSERT INTO role (title, salary, department_id) 
-VALUES ('Sales Lead', 100000, 4);
-INSERT INTO role (title, salary, department_id)
-VALUES ('Salesperson', 80000, 4);
-INSERT INTO role (title, salary, department_id)
-VALUES ('Lead Engineer', 150000, 1);
-INSERT INTO role (title, salary, department_id)
-VALUES ('Software Engineer', 120000, 1);
-INSERT INTO role (title, salary, department_id)
-VALUES ('Account Manager', 160000, 2);
-INSERT INTO role (title, salary, department_id)
-VALUES ('Accountant', 125000, 2);
-INSERT INTO role (title, salary, department_id)
-VALUES ('Legal Team Lead', 250000, 3);
-INSERT INTO role (title, salary, department_id)
-VALUES ('Lawyer', 190000, 3);
+VALUES 
+  ('Sales Lead', 100000, 4),
+  ('Salesperson', 80000, 4),
+  ('Lead Engineer', 150000, 1),
+  ('Software Engineer', 120000, 1),
+  ('Account Manager', 160000, 2),
+  ('Accountant', 125000, 2),
+  ('Legal Team Lead', 250000, 3),
+  ('Lawyer', 190000, 3);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ('John', 'Doe', 1, NULL);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ('Mike', 'Chan', 2, 1);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ('Ashley', 'Rodriguez', 3, NULL);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ('Kevin', 'Tupik', 4, 3);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ('Kunal', 'Singh', 5, NULL);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ('Malia', 'Brown', 6, 5);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ('Sarah', 'Lourd', 7, NULL);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ('Tom', 'Allen', 8, 7);
+VALUES 
+  ('John', 'Doe', 1, NULL),
+  ('Mike', 'Chan', 2, 1),
+  ('Ashley', 'Rodriguez', 3, NULL),
+  ('Kevin', 'Tupik', 4, 3),
+  ('Kunal', 'Singh', 5, NULL),
+  ('Malia', 'Brown', 6, 5),
+  ('Sarah', 'Lourd', 7, NULL),
+  ('Tom', 'Allen', 8, 7);

@@ -1,5 +1,6 @@
-const mysql = require('mysql2');
-const dotenv = require('dotenv').config();
+import mysql from 'mysql2';
+import dotenv from 'dotenv';
+dotenv.config();  // Load .env file
 
 // Connect to database
 const db = mysql.createConnection(
@@ -11,7 +12,7 @@ const db = mysql.createConnection(
     password: process.env.DB_PW,
     database: process.env.NAME
   },
-  console.log('Connected to the employee_tracker database.')
+  console.log(`Connected to the ${process.env.DB_NAME} database.`)
 );
 
-module.exports = db;
+export default db;
