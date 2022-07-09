@@ -149,4 +149,78 @@ function addEmployee() {
   })
 }
 
+function updateEmployeeRole() {
+  db.query('SELECT * FROM employee, role', (err, results) => {
+    if (err) throw err;
 
+    inquirer.prompt([
+      {
+          name: "employee",
+          type: "rawlist",
+          choices: () => {
+              let choiceArray = [];
+              for (let i = 0; i < results.length; i++) {
+                  choiceArray.push(results[i].last_name);
+              }
+              // remove duplicates
+              let cleanChoiceArray = [...new Set(choiceArray)];
+              return cleanChoiceArray;
+          },
+          message: "Which employee would you like to update?"
+      },
+      {
+        name: "role",
+        type: "rawlist",
+        choices: () => {
+            let choiceArray = [];
+            for (let i = 0; i < results.length; i++) {
+                choiceArray.push(results[i].title);
+            }
+            //remove duplicates
+            let cleanChoiceArray = [...new Set(choiceArray)];
+            return cleanChoiceArray;
+        },
+        message: "What is the employee's new role?"
+      }
+    ]).then(answer => {
+      let chosenEmployee;
+      let chosenRole;
+
+      for (let i = 0; i < results.length; i++) {
+        if (results[i].last_name === answer.employee) {
+            chosenEmployee = results[i];
+        }
+      }
+
+      for (let i = 0; i < results.length; i++) {
+        if (results[i].title === answer.role) {
+            chosenRole = results[i];
+        }
+      }
+
+      db.query(`UPDATE employee SET ? WHERE ?`,
+        [
+          {
+            role_id: chosenRole
+          },
+          {
+            last_name: chosenEmployee
+          }
+        ],
+        (err) => {
+          if (err) throw err;
+          console.log(`${answer.employee}'s role was updated to ${answer.role}.`);
+          start();
+        }
+      );
+    })
+  })
+}
+
+function viewAllRole() {
+  db.query('SELECT * FROM role', (err, results) => {
+    if (err) throw err;
+    console.table(results);
+    start();
+  });
+}
