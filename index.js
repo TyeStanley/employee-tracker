@@ -224,3 +224,109 @@ function viewAllRole() {
     start();
   });
 }
+
+function addRole() {
+  db.query('SELECT * FROM department', (err, results) => {
+    if (err) throw err;
+
+    inquirer.prompt([
+      {
+        name: "title",
+        type: "input",
+        message: "What is the title for the new role?",
+        validate: (value) => {
+          if (value) {
+            return true;
+          } else {
+            console.log("Please enter the title.");
+          }
+        }
+      },
+      {
+        name: "salary",
+        type: "input",
+        message: "What is this new role's salary",
+        validate: (value) => {
+          if (isNaN(value) === false) {
+          return true;
+          } 
+          console.log("Please enter a number");
+        }
+      },
+      {
+        name: "department",
+        type: "rawlist",
+        choices: () => {
+          let choiceArray = [];
+          for (let i = 0; i < results.length; i++) {
+            choiceArray.push(results[i].name);
+          }
+          return choiceArray;
+        },
+        message: "What department is this new role under?",
+      }
+    ]).then(answer => {
+      let chosenDepartment;
+      for (let i = 0; i < results.length; i++) {
+        if (results[i].name === answer.department) {
+          chosenDepartment = results[i];
+        }
+      }
+
+      db.query('INSERT INTO role SET ?',
+      {
+        title: answer.title,
+        salary: answer.salary,
+        department_id: chosenDepartment.id
+      },
+      (err) => {
+        if (err) throw err;
+        console.log(`${answer.title} was added as a new role.`);
+        start();
+      });
+    });
+  });
+}
+
+function viewAllDepartments() {
+  db.query('SELECT * FROM department', (err, results) => {
+    if (err) throw err;
+    console.table('Display All Departments', results);
+    start();
+  });
+}
+
+function addDepartment() {
+  inquirer.prompt([
+    {
+      name: "department",
+      type: "input",
+      message: "What is the name of the new department?",
+      validate: (value) => {
+        if (value) {
+          return true;
+        } else {
+          console.log("Please enter the name.");
+        }
+      }
+    }
+  ]).then(answer => {
+    db.query('INSERT INTO department SET ?',
+    {
+      name: answer.department
+    },
+    (err) => {
+      if (err) throw err;
+      console.log(`${answer.department} was added as a new department.`);
+      start();
+    });
+  });
+}
+
+function quit() {
+  figlet("Good \n \n Bye!", (err, data) => {
+    if (err) throw err;
+    console.log(data);
+  });
+  process.exit();
+}
